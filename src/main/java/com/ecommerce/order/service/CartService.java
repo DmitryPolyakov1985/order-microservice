@@ -6,17 +6,12 @@ import com.ecommerce.order.dto.CartItemRequest;
 import com.ecommerce.order.dto.ProductResponse;
 import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.model.CartItem;
-//import com.ecommerce.order.model.Product;
-//import com.ecommerce.order.model.User;
 import com.ecommerce.order.repository.CartItemRepository;
-//import com.ecommerce.order.repository.ProductRepository;
-//import com.ecommerce.order.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,13 +19,9 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ProductServiceClient productServiceClient;
     private final UserServiceClient userServiceClient;
-//    private ProductRepository productRepository;
-//    private UserRepository userRepository;
 
     public CartService(CartItemRepository cartItemRepository, ProductServiceClient productServiceClient, UserServiceClient userServiceClient) {
         this.cartItemRepository = cartItemRepository;
-//        this.productRepository = productRepository;
-//        this.userRepository =  userRepository;
         this.productServiceClient = productServiceClient;
         this.userServiceClient = userServiceClient;
     }
