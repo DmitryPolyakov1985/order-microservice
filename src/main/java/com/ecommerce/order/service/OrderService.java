@@ -34,16 +34,10 @@ public class OrderService {
             return Optional.empty();
         }
 
-//        UserResponse userResponse = userServiceClient.getUserDetails(userId);
-//        if (userResponse == null) {
-//            return Optional.empty();
-//        }
-        // validate user
-//         Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
-//        if (userOpt.isEmpty()) {
-//            return Optional.empty();
-//        }
-//        User user = userOpt.get();
+        UserResponse userResponse = userServiceClient.getUserDetails(userId);
+        if (userResponse == null) {
+            return Optional.empty();
+        }
 
         // calculate total price
         BigDecimal totalPrice = cartItems.stream()
