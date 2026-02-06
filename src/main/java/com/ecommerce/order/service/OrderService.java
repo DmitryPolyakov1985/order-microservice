@@ -1,7 +1,9 @@
 package com.ecommerce.order.service;
 
+import com.ecommerce.order.clients.UserServiceClient;
 import com.ecommerce.order.dto.OrderItemDTO;
 import com.ecommerce.order.dto.OrderResponse;
+import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.model.*;
 import com.ecommerce.order.repository.OrderRepository;
 //import com.ecommerce.order.repository.UserRepository;
@@ -16,11 +18,13 @@ public class OrderService {
     private CartService cartService;
 //    private UserRepository userRepository;
     private OrderRepository orderRepository;
+    private final UserServiceClient userServiceClient;
 
-    public OrderService(CartService cartService, OrderRepository orderRepository) {
+    public OrderService(CartService cartService, OrderRepository orderRepository, UserServiceClient userServiceClient) {
         this.cartService = cartService;
 //        this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.userServiceClient = userServiceClient;
     }
 
     public Optional<OrderResponse> createOrder(String userId) {
@@ -29,6 +33,11 @@ public class OrderService {
         if (cartItems.isEmpty()) {
             return Optional.empty();
         }
+
+//        UserResponse userResponse = userServiceClient.getUserDetails(userId);
+//        if (userResponse == null) {
+//            return Optional.empty();
+//        }
         // validate user
 //         Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
 //        if (userOpt.isEmpty()) {
@@ -43,7 +52,7 @@ public class OrderService {
 
         // create order
         Order order = new Order();
-        order.setUserId(Long.valueOf(userId));
+        order.setUserId(userId);
         order.setStatus(OrderStatus.CONFIRMED);
         order.setTotalAmount(totalPrice);
         List<OrderItem> orderItems = cartItems.stream()
