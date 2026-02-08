@@ -6,7 +6,6 @@ import com.ecommerce.order.dto.OrderResponse;
 import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.model.*;
 import com.ecommerce.order.repository.OrderRepository;
-//import com.ecommerce.order.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,14 +14,12 @@ import java.util.Optional;
 
 @Service
 public class OrderService {
-    private CartService cartService;
-//    private UserRepository userRepository;
-    private OrderRepository orderRepository;
+    private final CartService cartService;
+    private final OrderRepository orderRepository;
     private final UserServiceClient userServiceClient;
 
     public OrderService(CartService cartService, OrderRepository orderRepository, UserServiceClient userServiceClient) {
         this.cartService = cartService;
-//        this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.userServiceClient = userServiceClient;
     }
